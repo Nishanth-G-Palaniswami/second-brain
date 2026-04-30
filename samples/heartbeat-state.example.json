@@ -1,0 +1,87 @@
+{
+  "_comment": "Synthetic example of the file written to .claude/data/state/heartbeat-state.json after every run. All IDs, addresses, and names are fake.",
+  "last_run_at": "2026-04-30T13:30:00.412183+00:00",
+  "last_diff_at": "2026-04-30T13:30:00.412183+00:00",
+  "snapshot": {
+    "_built_at": "2026-04-30T13:30:00.118047+00:00",
+    "gmail": [
+      {
+        "id": "18f9c2a5d1e0f8a1",
+        "thread_id": "thr_AAAA1111BBBB2222",
+        "sender": "Alex Chen <alex@example.com>",
+        "to": ["you@example.com"],
+        "subject": "Re: design review notes from Tuesday",
+        "snippet": "Thanks for the writeup — two quick follow-ups on the eval gating section…",
+        "date": "2026-04-30T12:14:08+00:00",
+        "labels": ["INBOX", "UNREAD"],
+        "unread": true
+      },
+      {
+        "id": "18f9c1f4a3b2c1d0",
+        "thread_id": "thr_CCCC3333DDDD4444",
+        "sender": "Priya Raman <priya@example.com>",
+        "to": ["you@example.com", "team@example.com"],
+        "subject": "intro: Sam from the data platform team",
+        "snippet": "Adding Sam — they've been looking at the same retention question…",
+        "date": "2026-04-30T11:42:55+00:00",
+        "labels": ["INBOX", "UNREAD"],
+        "unread": true
+      }
+    ],
+    "slack": [
+      {
+        "channel": "C0EXAMPLE001",
+        "channel_name": "eng-platform",
+        "ts": "1714477680.001000",
+        "user": "U0EXAMPLE99",
+        "user_name": "Priya Raman",
+        "text": "Heads up — the index rebuild PR is ready when you are. Will need a 5-min check on the chunk-size param.",
+        "permalink": "https://example.slack.com/archives/C0EXAMPLE001/p1714477680001000",
+        "is_dm": false,
+        "is_mention": true
+      }
+    ],
+    "github": [
+      {
+        "kind": "pr_review_requested",
+        "repo": "yourname/example-project",
+        "number": 142,
+        "title": "Fix race in incremental reindex when sha matches but mtime changed",
+        "url": "https://github.com/yourname/example-project/pull/142",
+        "updated_at": "2026-04-30T11:08:21Z"
+      }
+    ],
+    "calendar": [
+      {
+        "summary": "Standup",
+        "start": "2026-04-30T15:00:00-04:00",
+        "end": "2026-04-30T15:15:00-04:00",
+        "hangout": "https://meet.google.com/example-link"
+      },
+      {
+        "summary": "Eval review with Alex",
+        "start": "2026-04-30T16:30:00-04:00",
+        "end": "2026-04-30T17:00:00-04:00",
+        "hangout": null
+      }
+    ]
+  },
+  "habits": {
+    "main-project": {
+      "checked": true,
+      "source": "github.updated_at today"
+    },
+    "learning": {
+      "checked": false,
+      "source": "#learning tag in today's daily log"
+    },
+    "inbox-size": {
+      "checked": true,
+      "source": "triage count = 2 (target < 10)"
+    }
+  },
+  "drafts_written": [
+    "drafts/active/2026-04-30_email_re-design-review-notes.md"
+  ],
+  "last_response": "(truncated to 4000 chars in the real file — agent's reasoning + the draft it produced)"
+}
