@@ -1,6 +1,8 @@
 # secondbrain
 
-A starter kit for building your own AI second brain on top of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) — a proactive, persistent assistant that knows your context, remembers across sessions, drafts in your voice, and keeps you informed.
+My personal AI second brain. I run this daily over my own Gmail, Slack, Calendar, and GitHub — drafting replies, surfacing meeting context, and maintaining a living knowledge vault on top of [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Open-sourced as a starter kit so you can fork and run your own.
+
+<!-- TODO: insert screenshot or GIF of a real drafts/active/ entry being written by triage-inbox or the heartbeat -->
 
 > Inspired by [coleam00/second-brain-starter](https://github.com/coleam00/second-brain-starter); rewritten and extended with sanitized versions of skills, integrations, hooks, and a heartbeat that I built and use myself.
 
