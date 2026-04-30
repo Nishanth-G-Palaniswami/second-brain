@@ -4,8 +4,6 @@ A starter kit for building your own AI second brain on top of [Claude Code](http
 
 > Inspired by [coleam00/second-brain-starter](https://github.com/coleam00/second-brain-starter); rewritten and extended with sanitized versions of skills, integrations, hooks, and a heartbeat that I built and use myself.
 
-![Architecture overview](SecondBrainArchitecture.png)
-
 ## What's included
 
 - **Skills** for Claude Code:
@@ -28,32 +26,24 @@ A starter kit for building your own AI second brain on top of [Claude Code](http
 
 ## Architecture
 
+```mermaid
+flowchart TB
+    Hooks["**Hooks** (Claude Code lifecycle)<br/>SessionStart · PreCompact · SessionEnd"]
+    Memory["**Memory Layer** — vault, source of truth<br/>SOUL.md · USER.md · MEMORY.md · daily/"]
+    Integrations["**Integrations** (Python CLI; LLM never holds creds)<br/>Gmail · Slack · GitHub · Calendar"]
+    Skills["**Skills** (.claude/skills/*)<br/>create-second-brain-prd · morning-plan · triage-inbox<br/>slack-dm-digest · slack-channel-digest · vault-navigator<br/>the-humanizer · project-status"]
+    Heartbeat["**Heartbeat** (scheduled, every 30 min)<br/>gather signals → Claude reasons → drafts + notifications"]
+    Search["**Memory Search**<br/>sqlite-vec + fastembed (local ONNX)<br/>incremental mtime+sha diff reindex"]
+
+    Hooks <-->|loads / saves context| Memory
+    Integrations -->|signals| Heartbeat
+    Heartbeat -->|writes drafts + logs| Memory
+    Memory -->|indexes| Search
+    Search -.->|powers retrieval for| Skills
+    Skills -->|reads + writes| Memory
 ```
-Memory Layer (center of everything)
-    SOUL.md       Agent personality, values, boundaries
-    USER.md       Your profile, accounts, preferences
-    MEMORY.md     Key decisions, lessons, active projects
-    daily/        Timestamped session logs
 
-Hooks (context persistence)
-    SessionStart  Loads memory into every conversation
-    PreCompact    Saves context before auto-compaction
-    SessionEnd    Captures decisions on exit
-
-Integrations (platform connections)
-    query.py gmail|slack|github|calendar — Python CLI wrappers
-    LLM never holds credentials
-
-Skills (extensible capabilities)
-    Progressive disclosure — metadata always loaded, instructions on demand
-
-Heartbeat (proactive monitoring)
-    Python gathers data → Claude reasons → notifications fire
-
-Memory Search (hybrid RAG)
-    fastembed (local ONNX) + sqlite-vec
-    Incremental mtime+sha diff reindex
-```
+The vault (the markdown files at `${SECOND_BRAIN_VAULT}`) is the source of truth. Everything else reads from or writes to it. Skills and the heartbeat are the active components; hooks and memory search are the substrate.
 
 ## Quick start
 
@@ -135,7 +125,16 @@ The skills in this repo default to **Advisor** mode — they read, draft, and fi
 
 ## Why build your own
 
-![Why build your own](WhyBuildYourOwnSecondBrain.png)
+A general-purpose personal AI agent that has read-access to your private data, can take outbound actions, and ingests untrusted content (emails, web pages, scraped docs) is one prompt-injection away from real exfiltration. Building your own doesn't make the threat go away, but it shifts the trade-offs in your favor:
+
+- **You wrote every line.** No marketplace, no third-party skill registry, no plugin you didn't review. Skills live in this repo.
+- **Credentials stay in Python wrappers, not in the LLM context.** The agent runs `query.py gmail triage`; it never holds the OAuth token.
+- **Read-only by default.** Outbound actions are explicitly disallowed at the integration boundary — Gmail uses `gmail.modify` scope, which the API itself refuses to send from. Sending is a separate, manual step.
+- **Drafts before sends.** Anything outbound lands in `drafts/active/` for your review.
+- **Pre-tool hooks validate every action** against the rules in your `USER.md` before it runs (see `.claude/scripts/security/guardrails.py`). Drift in the agent doesn't bypass them.
+- **Local memory.** Vault, search index, and embeddings all live on your disk. No vendor sees your second brain.
+
+This is the security posture you'd want from any agent that touches your real data. The benefit of building it yourself is that those properties stay in your repo, not in someone else's release notes.
 
 ## Roadmap
 

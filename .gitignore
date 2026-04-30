@@ -28,3 +28,7 @@ leads/
 
 # Personal vault references (defense in depth)
 **/darkvault/**
+
+# Upstream-derived diagram PNGs — replaced by mermaid blocks in README
+SecondBrainArchitecture.png
+WhyBuildYourOwnSecondBrain.png
