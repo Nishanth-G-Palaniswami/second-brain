@@ -1,0 +1,30 @@
+# Environment
+.env
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code state
+.claude/data/
+.claude/settings.local.json
+*.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Generated plans
+.agent/
+
+# Personal answers / drafts — never publish.
+# (The blank template ships at .claude/skills/.../my-second-brain-requirements.md;
+# users copy it to the project root and fill it out — the copy stays local.)
+/my-second-brain-requirements.md
+drafts/
+leads/
+*.local.json
+
+# Personal vault references (defense in depth)
+**/darkvault/**
