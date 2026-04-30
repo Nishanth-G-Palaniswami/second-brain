@@ -1,5 +1,7 @@
 # secondbrain
 
+[![tests](https://github.com/Nishanth-G-Palaniswami/second-brain/actions/workflows/test.yml/badge.svg)](https://github.com/Nishanth-G-Palaniswami/second-brain/actions/workflows/test.yml)
+
 My personal AI second brain. I run this daily over my own Gmail, Slack, Calendar, and GitHub — drafting replies, surfacing meeting context, and maintaining a living knowledge vault on top of [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Open-sourced as a starter kit so you can fork and run your own.
 
 <!-- TODO: insert screenshot or GIF of a real drafts/active/ entry being written by triage-inbox or the heartbeat -->
