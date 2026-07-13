@@ -4,8 +4,6 @@
 
 My personal AI second brain. I run this daily over my own Gmail, Slack, Calendar, and GitHub — drafting replies, surfacing meeting context, and maintaining a living knowledge vault on top of [Claude Code](https://docs.anthropic.com/en/docs/claude-code). Open-sourced as a starter kit so you can fork and run your own.
 
-<!-- TODO: insert screenshot or GIF of a real drafts/active/ entry being written by triage-inbox or the heartbeat -->
-
 > Inspired by [coleam00/second-brain-starter](https://github.com/coleam00/second-brain-starter); rewritten and extended with sanitized versions of skills, integrations, hooks, and a heartbeat that I built and use myself.
 
 ## What's included
@@ -133,7 +131,7 @@ A general-purpose personal AI agent that has read-access to your private data, c
 
 - **You wrote every line.** No marketplace, no third-party skill registry, no plugin you didn't review. Skills live in this repo.
 - **Credentials stay in Python wrappers, not in the LLM context.** The agent runs `query.py gmail triage`; it never holds the OAuth token.
-- **Read-only by default.** Outbound actions are explicitly disallowed at the integration boundary — Gmail uses `gmail.modify` scope, which the API itself refuses to send from. Sending is a separate, manual step.
+- **Read-only by default.** Sending is never a side effect of the agent's normal operation: outbound calls are blocked by deterministic guardrails (`.claude/scripts/security/guardrails.py`), which reject any Gmail-send call — SDK dot-form or REST slash-form, including URL-encoded variants — before it runs. Drafting a reply and actually sending it are two separate, manual steps.
 - **Drafts before sends.** Anything outbound lands in `drafts/active/` for your review.
 - **Pre-tool hooks validate every action** against the rules in your `USER.md` before it runs (see `.claude/scripts/security/guardrails.py`). Drift in the agent doesn't bypass them.
 - **Local memory.** Vault, search index, and embeddings all live on your disk. No vendor sees your second brain.

@@ -26,7 +26,7 @@ tool_input = {
 DENIED — Gmail REST `users/<id>/messages/send` path is disallowed; use drafts only. (USER.md boundary 1)
 ```
 
-**Why:** Boundary 1 — "Never send emails/messages without approval." The rule pattern catches both the SDK-style call (`service.users().messages().send(...)`) and the REST URL form (`/users/me/messages/send`, including `%2F`-encoded variants). The fix found in commit [`c9fde97`](https://github.com/Nishanth-G-Palaniswami/second-brain/commit/c9fde97) closed a gap where the dot-form regex didn't match the slash-form URL.
+**Why:** Boundary 1 — "Never send emails/messages without approval." The rule pattern catches both the SDK-style call (`service.users().messages().send(...)`) and the REST URL form (`/users/me/messages/send`, including `%2F`-encoded variants). A regression test in `tests/test_guardrails.py` locks in the slash-form + `%2F` cases, after an earlier version of the dot-form regex was found not to match the URL form.
 
 ---
 

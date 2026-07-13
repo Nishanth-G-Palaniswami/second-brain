@@ -1,0 +1,12 @@
+# Core (memory search) — what the scripts in this repo import directly
+fastembed
+sqlite-vec
+
+# The agent runtime is Claude Code (https://docs.anthropic.com/en/docs/claude-code),
+# not a pip dependency.
+#
+# Optional, per integration you enable (see README "Fill in .env"):
+#   Gmail / Calendar : google-api-python-client google-auth google-auth-oauthlib
+#   Slack            : slack_sdk
+# The integration wrappers that use these are excluded from this public mirror;
+# install them when you wire in your own integrations.
